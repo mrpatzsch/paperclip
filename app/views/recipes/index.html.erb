@@ -1,29 +1,12 @@
-<p id="notice"><%= notice %></p>
 
+<%= form_for @recipe do |f| %>
+  <%= f.text_field :title, placeholder: :Title %><br>
+  <%= f.text_area :instructions, placeholder: :Instructions %><br>
+  <%= f.file_field :image %><br>
+  <%= f.submit %>
+<% end %>
 <h1>Listing Recipes</h1>
+<div id="recipes-con">
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Instructions</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+</div>
 
-  <tbody>
-    <% @recipes.each do |recipe| %>
-      <tr>
-        <td><%= recipe.title %></td>
-        <td><%= recipe.instructions %></td>
-        <td><%= link_to 'Show', recipe %></td>
-        <td><%= link_to 'Edit', edit_recipe_path(recipe) %></td>
-        <td><%= link_to 'Destroy', recipe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Recipe', new_recipe_path %>

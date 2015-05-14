@@ -14,3 +14,42 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  var $recipesCon = $("#recipes-con");
+
+  $.get("/recipes.json")
+    .done(function(recipes) {
+      console.log("All Recipes:", recipes);
+      recipes.forEach(function(recipe) {
+        $recipesCon.append(recipe.title + "<br>" + 
+           recipe.instructions + "<br>" + 
+           recipe.image + "<br>" + 
+           "<button class\"edit\">Edit</button>" + 
+                          "<button class=\"delete\">Delete</button>");
+      });
+    });
+    var $recipeForm = $("#new_recipe");
+    $recipeForm.on("submit", function(event) {
+      event.preventDefault();
+      console.log("Form submitted", $(this).serialize());
+      var content = $("#recipe_title").val();
+      var instructions = $("#recipe_instructions").val();
+      var image = $("#recipe_image").val();
+      $.post("/recipes.json", {
+        recipe: {
+                  title: content,
+                  instructions: instructions,
+                  image: image
+                }
+      }).done(function(createdRecipe) {
+        var $recipe = $(createdRecipe.content +
+                      createdRecipe.instructions +
+                      createdRecipe.image);
+        $recipesCon.append($recipe);
+      });
+      this.reset();
+    });
+   
+});
+

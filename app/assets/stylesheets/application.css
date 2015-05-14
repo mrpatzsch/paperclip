@@ -1,3 +1,13 @@
+.links li {
+  display: inline-block;
+}
+.info li {
+  list-style-type: none;
+  display: inline;
+}
+body {
+  text-align: center;
+}
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
